@@ -24,7 +24,7 @@ namespace Recipes.Helpers
                     toastConfig.MessageTextColor = Color.White;
                     break;
                 case DialogType.DEFAULT:
-                    toastConfig.BackgroundColor = (Color)Application.Current.Resources["overstock_primary"];
+                    toastConfig.BackgroundColor = (Color)Application.Current.Resources["recipes_primary"];
                     toastConfig.MessageTextColor = Color.White;
                     break;
                 case DialogType.SUCCESS:

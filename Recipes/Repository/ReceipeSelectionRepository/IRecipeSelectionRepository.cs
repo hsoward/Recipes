@@ -7,6 +7,8 @@ namespace Recipes.Repository.ReceipeSelectionRepository
 {
     public interface IRecipeSelectionRepository
     {
-        Task<(List<Recipe> Recipes, bool IsSuccess)> GetRecipesAsync();
+        Task<(List<Recipe> Recipes, bool IsSuccess)> GetAllMexicanRecipes();
+        Task<(List<Recipe> Recipes, bool IsSuccess)> GetAllAmericanRecipes();
+        Task<(List<Recipe> Recipes, bool IsSuccess)> GetAllItalianRecipes();
     }
 }

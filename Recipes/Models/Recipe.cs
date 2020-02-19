@@ -1,9 +1,10 @@
 ﻿using System;
+using MTI.XamEssentials.MxeMvvm;
 using Xamarin.Forms;
 
 namespace Recipes.Models
 {
-    public class Recipe
+    public class Recipe : MxeObservableObject
     {
         public string Name { get; set; }
         public string Author { get; set; }
