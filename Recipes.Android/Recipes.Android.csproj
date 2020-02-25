@@ -147,7 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Recipes\Recipes.csproj">
-      <Project>{8082DFC1-798A-478A-9D50-DF46D7EF2822}</Project>
+      <Project>{4AAFE0A7-6460-4788-8102-14E64CF35780}</Project>
       <Name>Recipes</Name>
     </ProjectReference>
   </ItemGroup>

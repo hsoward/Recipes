@@ -11,6 +11,7 @@ using Recipes.Helpers;
 using MTI.XamEssentials.Helpers;
 using Xamarin.Forms;
 using System.Linq;
+using Recipes.Pages.RecipeDetailsPage;
 
 namespace Recipes.Pages.RecipeSelectionPage
 {
@@ -19,6 +20,8 @@ namespace Recipes.Pages.RecipeSelectionPage
     {
         #region Fields
         private readonly IRecipeSelectionRepository _recipeSelectionRepository;
+
+        private bool IsLocked;
         private Recipe recipeOption;
         public Recipe RecipeOption
         {
@@ -32,6 +35,7 @@ namespace Recipes.Pages.RecipeSelectionPage
         public RecipeSelectionPageModel(IRecipeSelectionRepository recipeSelectionRepository)
         {
             _recipeSelectionRepository = recipeSelectionRepository;
+            Title = "Recipes";
         }
 
         #endregion
@@ -51,6 +55,13 @@ namespace Recipes.Pages.RecipeSelectionPage
         {
             get => filteredRecipes;
             set => SetProperty(ref filteredRecipes, value);
+        }
+
+        private List<Recipe> allRecipes = new List<Recipe>();
+        public List<Recipe> AllRecipes
+        {
+            get => allRecipes;
+            set => SetProperty(ref allRecipes, value);
         }
 
         private List<Recipe> americanRecipes = new List<Recipe>();
@@ -90,8 +101,25 @@ namespace Recipes.Pages.RecipeSelectionPage
             {
                 return new Command<string>((searchString) =>
                 {
-                    //FilteredRecipes = new MxeObservableRangeCollection<Recipe>(AllRecipes.Where(o => o.Name.ToLower().Contains(searchString.ToLower())));
+                    FilteredRecipes = new MxeObservableRangeCollection<Recipe>(AllRecipes.Where(o => o.Name.ToLower().Contains(searchString.ToLower())));
+                });
+            }
+        }
 
+        public Command RecipeSelected
+        {
+            get
+            {
+                return new Command(async (recipe) =>
+                {
+                    if (IsLocked)
+                    {
+                        return;
+                    }
+
+                    IsLocked = true;
+                    await CoreMethods.PushPageModel<RecipeDetailsPageModel>(SelectedRecipe);
+                    await Task.Delay(600).ContinueWith(t => IsLocked = false);
                 });
             }
         }
@@ -105,8 +133,23 @@ namespace Recipes.Pages.RecipeSelectionPage
             await GetAllMexicanRecipesAsync();
             await GetAllAmericanRecipesAsync();
             await GetAllItalianRecipesAsync();
+            await GetAllRecipesAsync();
         }
         #endregion
+
+        private async Task GetAllRecipesAsync()
+        {
+            var response = await _recipeSelectionRepository.GetAllRecipes();
+
+            if (response.IsSuccess)
+            {
+                AllRecipes = response.Recipes;
+            }
+            else
+            {
+                UserDialogs.Instance.Toast(DialogUtils.GetToastConfig(DialogType.ERROR, "Unable to retrieve all recipes at this time."));
+            }
+        }
 
         private async Task GetAllMexicanRecipesAsync()
         {

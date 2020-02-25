@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
+using Acr.UserDialogs;
 using Foundation;
+using Serilog;
 using UIKit;
 
 namespace Recipes.iOS
@@ -20,11 +19,13 @@ namespace Recipes.iOS
         //
         // You have 17 seconds to return from this method, or iOS will terminate your application.
         //
+        [Foundation.Export("application:didFinishLaunchingWithOptions:")]
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            LoadApplication(new App());
 
+            LoadApplication(new App());
+            Log.Information("App started");
             return base.FinishedLaunching(app, options);
         }
     }

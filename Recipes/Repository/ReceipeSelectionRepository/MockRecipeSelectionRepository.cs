@@ -47,6 +47,17 @@ namespace Recipes.Repository.ReceipeSelectionRepository
             return Task.FromResult((Mapper.Map<List<RecipeDto>, List<Recipe>>(mexicanRecipes), true));
         }
 
+        public Task<(List<Recipe> Recipes, bool IsSuccess)> GetAllRecipes()
+        {
+            if (mockOrders.Count == 0)
+            {
+                PopulateRecipes();
+            }
+
+            var allRecipes = mockOrders;
+            return Task.FromResult((Mapper.Map<List<RecipeDto>, List<Recipe>>(allRecipes), true));
+        }
+
         public List<RecipeDto> PopulateRecipes()
         {
             mockOrders.Add(new RecipeDto

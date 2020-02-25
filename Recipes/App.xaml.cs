@@ -1,5 +1,6 @@
 ﻿using System;
 using MTI.XamEssentials.MxeMvvm;
+using MTI.XamEssentials.Services;
 using Recipes.Pages.RecipeSelectionPage;
 using Recipes.Repository.ReceipeSelectionRepository;
 using Xamarin.Forms;
@@ -11,12 +12,15 @@ namespace Recipes
     {
         Page page;
         private MxeNavigationContainer _mainNavContainer;
+        private IToastService _toastService;
 
         public App()
         {
             InitializeComponent();
 
             RegisterDI();
+            //This isn't working on iOS right now
+            _toastService = MxeIOC.Container.Resolve<IToastService>();
             Mapping.Mapping.RegisterMappings();
             SetMainPage();
         }

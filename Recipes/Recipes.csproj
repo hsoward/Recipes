@@ -31,6 +31,7 @@
     <Folder Include="Pages\RecipeSelectionPage\" />
     <Folder Include="Controls\" />
     <Folder Include="Repository\ReceipeSelectionRepository\" />
+    <Folder Include="Pages\RecipeDetailsPage\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Recipes.Services\Recipes.Services.csproj" />
