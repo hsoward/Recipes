@@ -14,48 +14,26 @@ namespace Recipes.Repository.ReceipeSelectionRepository
     {
         public List<RecipeDto> mockOrders = new List<RecipeDto>();
 
-        public Task<(List<Recipe> Recipes, bool IsSuccess)> GetAllAmericanRecipes()
+        public Task<(List<Recipe> Recipes, bool IsSuccess)> GetDessertRecipes()
         {
             if (mockOrders.Count == 0)
             {
                 PopulateRecipes();
             }
 
-            var americanRecipes = mockOrders.FindAll(x => x.type == RecipeType.AMERICAN.GetDescription());
-            return Task.FromResult((Mapper.Map<List<RecipeDto>, List<Recipe>>(americanRecipes), true));
+            var dessertRecipes = mockOrders.FindAll(x => x.category == RecipeCategory.DESSERT.GetDescription());
+            return Task.FromResult((Mapper.Map<List<RecipeDto>, List<Recipe>>(dessertRecipes), true));
         }
 
-        public Task<(List<Recipe> Recipes, bool IsSuccess)> GetAllItalianRecipes()
+        public Task<(List<Recipe> Recipes, bool IsSuccess)> GetDinnerRecipes()
         {
             if (mockOrders.Count == 0)
             {
                 PopulateRecipes();
             }
 
-            var italianRecipes = mockOrders.FindAll(x => x.type == RecipeType.ITALIAN.GetDescription());
-            return Task.FromResult((Mapper.Map<List<RecipeDto>, List<Recipe>>(italianRecipes), true));
-        }
-
-        public Task<(List<Recipe> Recipes, bool IsSuccess)> GetAllMexicanRecipes()
-        {
-            if (mockOrders.Count == 0)
-            {
-                PopulateRecipes();
-            }
-            
-            var mexicanRecipes = mockOrders.FindAll(x => x.type == RecipeType.MEXICAN.GetDescription());
-            return Task.FromResult((Mapper.Map<List<RecipeDto>, List<Recipe>>(mexicanRecipes), true));
-        }
-
-        public Task<(List<Recipe> Recipes, bool IsSuccess)> GetAllRecipes()
-        {
-            if (mockOrders.Count == 0)
-            {
-                PopulateRecipes();
-            }
-
-            var allRecipes = mockOrders;
-            return Task.FromResult((Mapper.Map<List<RecipeDto>, List<Recipe>>(allRecipes), true));
+            var dinnerRecipes = mockOrders.FindAll(x => x.category == RecipeCategory.DINNER.GetDescription());
+            return Task.FromResult((Mapper.Map<List<RecipeDto>, List<Recipe>>(dinnerRecipes), true));
         }
 
         public List<RecipeDto> PopulateRecipes()
@@ -66,6 +44,7 @@ namespace Recipes.Repository.ReceipeSelectionRepository
                 author = "Kentucky Guera",
                 calories = 263,
                 type = RecipeType.MEXICAN.GetDescription(),
+                category = RecipeCategory.DINNER.GetDescription(),
                 image = Device.RuntimePlatform == Device.Android
                 ? ImageSource.FromFile("drawable/chiliRellenos.jpg")
                 : ImageSource.FromFile("Images/chiliRellenos.jpg")
@@ -76,6 +55,7 @@ namespace Recipes.Repository.ReceipeSelectionRepository
                 author = "Averie Sunshine",
                 calories = 559,
                 type = RecipeType.MEXICAN.GetDescription(),
+                category = RecipeCategory.DINNER.GetDescription(),
                 image = Device.RuntimePlatform == Device.Android
                 ? ImageSource.FromFile("drawable/skinnyMexicanChicken.jpg")
                 : ImageSource.FromFile("Images/skinnyMexicanChicken.jpg")
@@ -86,6 +66,7 @@ namespace Recipes.Repository.ReceipeSelectionRepository
                 author = "Isabel Eats",
                 calories = 263,
                 type = RecipeType.MEXICAN.GetDescription(),
+                category = RecipeCategory.DINNER.GetDescription(),
                 image = Device.RuntimePlatform == Device.Android
                 ? ImageSource.FromFile("drawable/chickenFajitas.jpg")
                 : ImageSource.FromFile("Images/chickenFajitas.jpg")
@@ -96,6 +77,7 @@ namespace Recipes.Repository.ReceipeSelectionRepository
                 author = "Kathi & Rachel",
                 calories = 267,
                 type = RecipeType.MEXICAN.GetDescription(),
+                category = RecipeCategory.DINNER.GetDescription(),
                 image = Device.RuntimePlatform == Device.Android
                 ? ImageSource.FromFile("drawable/mexicanCasserole.jpg")
                 : ImageSource.FromFile("Images/mexicanCasserole.jpg")
@@ -107,6 +89,7 @@ namespace Recipes.Repository.ReceipeSelectionRepository
                 author = "Suzy",
                 calories = 218,
                 type = RecipeType.ITALIAN.GetDescription(),
+                category = RecipeCategory.DINNER.GetDescription(),
                 image = Device.RuntimePlatform == Device.Android
                 ? ImageSource.FromFile("drawable/italianSkillet.jpg")
                 : ImageSource.FromFile("Images/italianSkillet.jpg")
@@ -117,6 +100,7 @@ namespace Recipes.Repository.ReceipeSelectionRepository
                 author = "Daniel Gritzer",
                 calories = 450,
                 type = RecipeType.ITALIAN.GetDescription(),
+                category = RecipeCategory.DINNER.GetDescription(),
                 image = Device.RuntimePlatform == Device.Android
                 ? ImageSource.FromFile("drawable/stuffedShells.jpg")
                 : ImageSource.FromFile("Images/stuffedShells.jpg")
@@ -127,6 +111,7 @@ namespace Recipes.Repository.ReceipeSelectionRepository
                 author = "Sabrina Snyder",
                 calories = 460,
                 type = RecipeType.ITALIAN.GetDescription(),
+                category = RecipeCategory.DINNER.GetDescription(),
                 image = Device.RuntimePlatform == Device.Android
                 ? ImageSource.FromFile("drawable/chickenMarsala.jpg")
                 : ImageSource.FromFile("Images/chickenMarsala.jpg")
@@ -137,6 +122,7 @@ namespace Recipes.Repository.ReceipeSelectionRepository
                 author = "Kathleen",
                 calories = 646,
                 type = RecipeType.AMERICAN.GetDescription(),
+                category = RecipeCategory.DINNER.GetDescription(),
                 image = Device.RuntimePlatform == Device.Android
                 ? ImageSource.FromFile("drawable/chopSuey.jpg")
                 : ImageSource.FromFile("Images/chopSuey.jpg")
@@ -147,6 +133,7 @@ namespace Recipes.Repository.ReceipeSelectionRepository
                 author = "McCormick",
                 calories = 310,
                 type = RecipeType.AMERICAN.GetDescription(),
+                category = RecipeCategory.DINNER.GetDescription(),
                 image = Device.RuntimePlatform == Device.Android
                 ? ImageSource.FromFile("drawable/chili.jpg")
                 : ImageSource.FromFile("Images/chili.jpg")
@@ -157,6 +144,7 @@ namespace Recipes.Repository.ReceipeSelectionRepository
                 author = "Eating on a Dime",
                 calories = 718,
                 type = RecipeType.AMERICAN.GetDescription(),
+                category = RecipeCategory.DINNER.GetDescription(),
                 image = Device.RuntimePlatform == Device.Android
                 ? ImageSource.FromFile("drawable/goulash.jpg")
                 : ImageSource.FromFile("Images/goulash.jpg")
@@ -167,6 +155,7 @@ namespace Recipes.Repository.ReceipeSelectionRepository
                 author = "Jessica Gavin",
                 calories = 200,
                 type = RecipeType.AMERICAN.GetDescription(),
+                category = RecipeCategory.DINNER.GetDescription(),
                 image = Device.RuntimePlatform == Device.Android
                 ? ImageSource.FromFile("drawable/potatoSalad.jpg")
                 : ImageSource.FromFile("Images/potatoSalad.jpg")
@@ -177,9 +166,43 @@ namespace Recipes.Repository.ReceipeSelectionRepository
                 author = "Emma Freud",
                 calories = 520,
                 type = RecipeType.AMERICAN.GetDescription(),
+                category = RecipeCategory.DINNER.GetDescription(),
                 image = Device.RuntimePlatform == Device.Android
                 ? ImageSource.FromFile("drawable/buffaloWings.jpg")
                 : ImageSource.FromFile("Images/buffaloWings.jpg")
+            });
+            mockOrders.Add(new RecipeDto
+            {
+                name = "Chocolate Lasagna",
+                author = "Amanda Formaro",
+                calories = 230,
+                type = RecipeType.AMERICAN.GetDescription(),
+                category = RecipeCategory.DESSERT.GetDescription(),
+                image = Device.RuntimePlatform == Device.Android
+                ? ImageSource.FromFile("drawable/chocolateLasagna.jpg")
+                : ImageSource.FromFile("Images/chocolateLasagna.jpg")
+            });
+            mockOrders.Add(new RecipeDto
+            {
+                name = "Pineapple Dream Dessert",
+                author = "Amanda Formaro",
+                calories = 376,
+                type = RecipeType.AMERICAN.GetDescription(),
+                category = RecipeCategory.DESSERT.GetDescription(),
+                image = Device.RuntimePlatform == Device.Android
+                ? ImageSource.FromFile("drawable/pineappleDream.jpg")
+                : ImageSource.FromFile("Images/pineappleDream.jpg")
+            });
+            mockOrders.Add(new RecipeDto
+            {
+                name = "No Bake Cheesecake Bites",
+                author = "Julia",
+                calories = 73,
+                type = RecipeType.AMERICAN.GetDescription(),
+                category = RecipeCategory.DESSERT.GetDescription(),
+                image = Device.RuntimePlatform == Device.Android
+                ? ImageSource.FromFile("drawable/cheesecakeBites.jpg")
+                : ImageSource.FromFile("Images/cheesecakeBites.jpg")
             });
 
             return mockOrders;

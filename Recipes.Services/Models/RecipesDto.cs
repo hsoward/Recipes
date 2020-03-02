@@ -18,5 +18,6 @@ namespace Recipes.Services.Models
         public ImageSource image { get; set; }
         public int calories { get; set; }
         public string type { get; set; }
+        public string category { get; set; }
     }
 }

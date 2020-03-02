@@ -57,32 +57,18 @@ namespace Recipes.Pages.RecipeSelectionPage
             set => SetProperty(ref filteredRecipes, value);
         }
 
-        private List<Recipe> allRecipes = new List<Recipe>();
-        public List<Recipe> AllRecipes
+        private List<Recipe> dinnerRecipes = new List<Recipe>();
+        public List<Recipe> DinnerRecipes
         {
-            get => allRecipes;
-            set => SetProperty(ref allRecipes, value);
+            get => dinnerRecipes;
+            set => SetProperty(ref dinnerRecipes, value);
         }
 
-        private List<Recipe> americanRecipes = new List<Recipe>();
-        public List<Recipe> AmericanRecipes
+        private List<Recipe> dessertRecipes = new List<Recipe>();
+        public List<Recipe> DessertRecipes
         {
-            get => americanRecipes;
-            set => SetProperty(ref americanRecipes, value);
-        }
-
-        private List<Recipe> mexicanRecipes = new List<Recipe>();
-        public List<Recipe> MexicanRecipes
-        {
-            get => mexicanRecipes;
-            set => SetProperty(ref mexicanRecipes, value);
-        }
-
-        private List<Recipe> italianRecipes = new List<Recipe>();
-        public List<Recipe> ItalianRecipes
-        {
-            get => italianRecipes;
-            set => SetProperty(ref italianRecipes, value);
+            get => dessertRecipes;
+            set => SetProperty(ref dessertRecipes, value);
         }
 
         private Recipe selectedRecipe;
@@ -101,7 +87,7 @@ namespace Recipes.Pages.RecipeSelectionPage
             {
                 return new Command<string>((searchString) =>
                 {
-                    FilteredRecipes = new MxeObservableRangeCollection<Recipe>(AllRecipes.Where(o => o.Name.ToLower().Contains(searchString.ToLower())));
+                    //FilteredRecipes = new MxeObservableRangeCollection<Recipe>(AllRecipes.Where(o => o.Name.ToLower().Contains(searchString.ToLower())));
                 });
             }
         }
@@ -130,20 +116,18 @@ namespace Recipes.Pages.RecipeSelectionPage
 
         public override async void Init(object initData)
         {
-            await GetAllMexicanRecipesAsync();
-            await GetAllAmericanRecipesAsync();
-            await GetAllItalianRecipesAsync();
-            await GetAllRecipesAsync();
+            await GetDinnerRecipesAsync();
+            await GetDessertRecipesAsync();
         }
         #endregion
 
-        private async Task GetAllRecipesAsync()
+        private async Task GetDinnerRecipesAsync()
         {
-            var response = await _recipeSelectionRepository.GetAllRecipes();
+            var response = await _recipeSelectionRepository.GetDinnerRecipes();
 
             if (response.IsSuccess)
             {
-                AllRecipes = response.Recipes;
+                DinnerRecipes = response.Recipes;
             }
             else
             {
@@ -151,45 +135,17 @@ namespace Recipes.Pages.RecipeSelectionPage
             }
         }
 
-        private async Task GetAllMexicanRecipesAsync()
+        private async Task GetDessertRecipesAsync()
         {
-            var response = await _recipeSelectionRepository.GetAllMexicanRecipes();
+            var response = await _recipeSelectionRepository.GetDessertRecipes();
 
             if (response.IsSuccess)
             {
-                MexicanRecipes = response.Recipes;
+                DessertRecipes = response.Recipes;
             }
             else
             {
-                UserDialogs.Instance.Toast(DialogUtils.GetToastConfig(DialogType.ERROR, "Unable to retrieve mexican recipes at this time."));
-            }
-        }
-
-        private async Task GetAllAmericanRecipesAsync()
-        {
-            var response = await _recipeSelectionRepository.GetAllAmericanRecipes();
-
-            if (response.IsSuccess)
-            {
-                AmericanRecipes = response.Recipes;
-            }
-            else
-            {
-                UserDialogs.Instance.Toast(DialogUtils.GetToastConfig(DialogType.ERROR, "Unable to retrieve american recipes at this time."));
-            }
-        }
-
-        private async Task GetAllItalianRecipesAsync()
-        {
-            var response = await _recipeSelectionRepository.GetAllItalianRecipes();
-
-            if (response.IsSuccess)
-            {
-                ItalianRecipes = response.Recipes;
-            }
-            else
-            {
-                UserDialogs.Instance.Toast(DialogUtils.GetToastConfig(DialogType.ERROR, "Unable to retrieve italian recipes at this time."));
+                UserDialogs.Instance.Toast(DialogUtils.GetToastConfig(DialogType.ERROR, "Unable to retrieve all recipes at this time."));
             }
         }
     }
