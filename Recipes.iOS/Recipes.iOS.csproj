@@ -144,7 +144,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\Recipes\Recipes.csproj">
-      <Project>{4AAFE0A7-6460-4788-8102-14E64CF35780}</Project>
+      <Project>{18319727-4C37-45EA-B34E-7605D30D7027}</Project>
       <Name>Recipes</Name>
     </ProjectReference>
   </ItemGroup>
@@ -169,5 +169,9 @@
     <BundleResource Include="Resources\Images\goulash.jpg" />
     <BundleResource Include="Resources\Images\potatoSalad.jpg" />
     <BundleResource Include="Resources\Images\buffaloWings.jpg" />
+    <BundleResource Include="Resources\Images\cheesecakeBites.jpg" />
+    <BundleResource Include="Resources\Images\chocolateLasagna.jpg" />
+    <BundleResource Include="Resources\Images\pineappleDream.jpg" />
+    <BundleResource Include="Resources\Images\rasberryOreo.jpg" />
   </ItemGroup>
 </Project>

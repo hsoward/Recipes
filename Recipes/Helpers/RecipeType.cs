@@ -5,11 +5,11 @@ namespace Recipes.Helpers
 {
     public enum RecipeType
     {
-        [Description("mexican")]
+        [Description("Mexican")]
         MEXICAN,
-        [Description("american")]
+        [Description("American")]
         AMERICAN,
-        [Description("italian")]
+        [Description("Italian")]
         ITALIAN
     }
 }

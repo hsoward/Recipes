@@ -5,11 +5,16 @@
     xmlns:mxe="clr-namespace:MTI.XamEssentials.MxeMvvm;assembly=XamEssentials"
     xmlns:behaviorsPack="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
     xmlns:controls="clr-namespace:Recipes.Controls"
+    xmlns:converter="clr-namespace:Recipes.Converters"
     x:Class="Recipes.Pages.RecipeSelectionPage.RecipeSelectionPage"
     Title="{Binding Title}"
     BackgroundColor="White"
     Visual="Material">
-
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:RecipeTypeConverter x:Key="recipeTypeConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <mxe:MxeBaseContentPage.Content>
         <ScrollView>
             <StackLayout BackgroundColor="{DynamicResource Key=background_gray}">
@@ -67,10 +72,20 @@
                         </StackLayout>
                     </Frame>
                 </StackLayout>
-                <ScrollView Orientation="Horizontal" >
-                    <controls:HorizontalList x:Name="MexicanListView" HeightRequest="500"
+                 <StackLayout>
+                        <Label Text="Dinner Recipes"
+                               Margin="10,8,0,0"
+                               FontSize="Large"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="StartAndExpand"
+                               FontAttributes="Bold"/>
+                     </StackLayout>
+                <ScrollView Orientation="Horizontal">
+                   
+                    
+                    <controls:HorizontalList x:Name="DinnerRecipeListView" HeightRequest="500"
                                              Padding="10"
-                                             ItemsSource="{Binding MexicanRecipes}"
+                                             ItemsSource="{Binding DinnerRecipes}"
                                              SelectedItem="{Binding SelectedRecipe}">
                         <controls:HorizontalList.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding RecipeSelected}" NumberOfTapsRequired="1"/>
@@ -83,7 +98,7 @@
                                     <StackLayout Spacing="0" BackgroundColor="Transparent">
                                         <StackLayout.GestureRecognizers>
                                             <TapGestureRecognizer
-                                                BindingContext="{Binding Source={x:Reference MexicanListView}, Path=BindingContext}"
+                                                BindingContext="{Binding Source={x:Reference DinnerRecipeListView}, Path=BindingContext}"
                                                 Command="{Binding RecipeSelected}"
                                                 NumberOfTapsRequired="1" />
                                         </StackLayout.GestureRecognizers>
@@ -96,7 +111,7 @@
                                                          BackgroundColor="{DynamicResource Key=NeutralGray1}"
                                                          Orientation="Horizontal"
                                                          Spacing="0">
-                                                <Label Text="Mexican"
+                                                <Label Text="{Binding Type, Converter={StaticResource recipeTypeConverter}}"
                                                         FontSize="Large"
                                                         VerticalOptions="CenterAndExpand"
                                                         Margin="0,5"
@@ -156,105 +171,47 @@
                         </controls:HorizontalList.ItemTemplate>
                     </controls:HorizontalList>
                 </ScrollView>
-                <ScrollView Orientation="Horizontal" >
-                    <controls:HorizontalList HeightRequest="500"
-                                         Padding="10"
-                                         ItemsSource="{Binding AmericanRecipes}">
+
+                <StackLayout>
+                    <Label Text="Dessert Recipes"
+                            Margin="10,8,0,0"
+                            FontSize="Large"
+                            VerticalOptions="CenterAndExpand"
+                            HorizontalOptions="StartAndExpand"
+                            FontAttributes="Bold"/>
+                </StackLayout>
+                <ScrollView Orientation="Horizontal">
+                   
+                    
+                    <controls:HorizontalList x:Name="DessertRecipeListView" HeightRequest="500"
+                                             Padding="10"
+                                             ItemsSource="{Binding DessertRecipes}"
+                                             SelectedItem="{Binding SelectedRecipe}">
+                        <controls:HorizontalList.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding RecipeSelected}" NumberOfTapsRequired="1"/>
+                        </controls:HorizontalList.GestureRecognizers>
                         <controls:HorizontalList.ItemTemplate>
                             <DataTemplate>
                                 <Frame Padding="0"
                                        BorderColor="{DynamicResource Key=NeutralGray3}"
                                        CornerRadius="4">
                                     <StackLayout Spacing="0" BackgroundColor="Transparent">
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                BindingContext="{Binding Source={x:Reference DessertRecipeListView}, Path=BindingContext}"
+                                                Command="{Binding RecipeSelected}"
+                                                NumberOfTapsRequired="1" />
+                                        </StackLayout.GestureRecognizers>
                                         <Frame Margin="0"
                                                 CornerRadius="0"
                                                 BorderColor="{DynamicResource Key=NeutralGray3}"
                                                 HasShadow="True"
                                                 Padding="0">
                                             <StackLayout Padding="0"
-                                                            BackgroundColor="{DynamicResource Key=NeutralGray1}"
-                                                            Orientation="Horizontal"
-                                                            Spacing="0">
-                                                <Label Text="American"
-                                                        FontSize="Large"
-                                                        VerticalOptions="CenterAndExpand"
-                                                        Margin="0,5"
-                                                        HorizontalOptions="CenterAndExpand"
-                                                        FontAttributes="Bold"/>
-                                            </StackLayout>
-                                        </Frame>
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="350" />
-                                                <RowDefinition Height="30" />
-                                                <RowDefinition Height="30" />
-                                            </Grid.RowDefinitions>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="200" />
-                                                <ColumnDefinition Width="2*" />
-                                            </Grid.ColumnDefinitions>
-                                            <Image Grid.Row="0"
-                                                    Grid.Column="0"
-                                                    Grid.ColumnSpan="2"
-                                                    WidthRequest="200"
-                                                    Margin="0"
-                                                    Aspect="AspectFill"
-                                                    Source="{Binding Image}"/>
-                                            <Label Grid.Row="1"
-                                                    Grid.Column="0"
-                                                    Grid.RowSpan="3"
-                                                    Margin="8,8,8,0"
-                                                    FontSize="Medium"
-                                                    Text="{Binding Name}"
-                                                    TextColor="{DynamicResource Key=primary}"
-                                                    HorizontalOptions="CenterAndExpand"
-                                                    HorizontalTextAlignment="Center"
-                                                   VerticalOptions="CenterAndExpand"/>
-                                            <Label Grid.Row="1"
-                                                    Grid.Column="1"
-                                                    Margin="0,8,8,0"
-                                                    FontSize="Medium"
-                                                    FontAttributes="Bold"
-                                                    Text="{Binding Calories, StringFormat='{0} Calories'}"
-                                                    TextColor="{DynamicResource Key=charcoal_gray}"
-                                                    HorizontalOptions="StartAndExpand"
-                                                    HorizontalTextAlignment="Start"/>
-                                            <Label Grid.Row="2"
-                                                    Grid.Column="1"
-                                                    Grid.RowSpan="3"
-                                                    Margin="0,0,8,0"
-                                                    FontSize="Medium"
-                                                    Text="{Binding Author, StringFormat='By: {0} '}"
-                                                    TextColor="{DynamicResource Key=charcoal_gray}"
-                                                    HorizontalOptions="StartAndExpand"
-                                                    HorizontalTextAlignment="Start"/>
-                                        </Grid>
-                                    </StackLayout>
-                                </Frame>
-                            </DataTemplate>
-                        </controls:HorizontalList.ItemTemplate>
-                    </controls:HorizontalList>
-                </ScrollView>
-                <ScrollView Orientation="Horizontal" >
-                    <controls:HorizontalList HeightRequest="500"
-                                             Padding="10"
-                                             ItemsSource="{Binding ItalianRecipes}">
-                        <controls:HorizontalList.ItemTemplate>
-                            <DataTemplate>
-                                <Frame Padding="0"
-                                       BorderColor="{DynamicResource Key=NeutralGray3}"
-                                       CornerRadius="4">
-                                    <StackLayout Spacing="0" BackgroundColor="Transparent">
-                                        <Frame Margin="0"
-                                                CornerRadius="0"
-                                                BorderColor="{DynamicResource Key=NeutralGray4}"
-                                                HasShadow="True"
-                                                Padding="0">
-                                            <StackLayout Padding="0"
-                                                            BackgroundColor="{DynamicResource Key=NeutralGray1}"
-                                                            Orientation="Horizontal"
-                                                            Spacing="0">
-                                                <Label Text="Italian"
+                                                         BackgroundColor="{DynamicResource Key=NeutralGray1}"
+                                                         Orientation="Horizontal"
+                                                         Spacing="0">
+                                                <Label Text="{Binding Type, Converter={StaticResource recipeTypeConverter}}"
                                                         FontSize="Large"
                                                         VerticalOptions="CenterAndExpand"
                                                         Margin="0,5"
