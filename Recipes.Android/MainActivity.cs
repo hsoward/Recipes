@@ -21,6 +21,7 @@ namespace Recipes.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
+            Forms.SetFlags("CollectionView_Experimental");
             Platform.Init(this, savedInstanceState);
             MTI.XamEssentials.Android.Platform.Init(this, savedInstanceState);
             Forms.Init(this, savedInstanceState);

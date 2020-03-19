@@ -18,50 +18,49 @@
     <mxe:MxeBaseContentPage.Content>
         <ScrollView>
             <StackLayout BackgroundColor="{DynamicResource Key=background_gray}">
-                <StackLayout
-                Padding="8,8,8,0"
-                HeightRequest="42"
-                BackgroundColor="{DynamicResource Key=search_bar_gray}"
-                Orientation="Horizontal">
+                <StackLayout Padding="8,8,8,0"
+                                 HeightRequest="42"
+                                 BackgroundColor="{DynamicResource Key=search_bar_gray}"
+                                 Orientation="Horizontal">
                     <Frame
-                    Padding="0"
-                    HeightRequest="42"
-                    BorderColor="Silver"
-                    CornerRadius="4"
-                    HasShadow="false"
-                    HorizontalOptions="FillAndExpand">
+                        Padding="0"
+                        HeightRequest="42"
+                        BorderColor="Silver"
+                        CornerRadius="4"
+                        HasShadow="false"
+                        HorizontalOptions="FillAndExpand">
                         <StackLayout Orientation="Horizontal">
                             <controls:BorderlessEntry
-                            x:Name="borderlessEntry"
-                            Margin="4,0,0,0"
-                            HeightRequest="42"
-                            AutomationId="searchBar"
-                            BackgroundColor="White"
-                            Placeholder="Search"
-                            Text="{Binding SearchTerm, Mode=TwoWay}"
-                            HorizontalOptions="FillAndExpand"
-                            VerticalOptions="CenterAndExpand">
+                                x:Name="borderlessEntry"
+                                Margin="4,0,0,0"
+                                HeightRequest="42"
+                                AutomationId="searchBar"
+                                BackgroundColor="White"
+                                Placeholder="Search"
+                                Text="{Binding SearchTerm, Mode=TwoWay}"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="CenterAndExpand">
 
                                 <controls:BorderlessEntry.Behaviors>
                                     <behaviorsPack:EventToCommandBehavior
-                                    Command="{Binding SearchCommand}"
-                                    CommandParameter="{Binding SearchTerm}"
-                                    EventName="Completed" />
+                                        Command="{Binding SearchCommand}"
+                                        CommandParameter="{Binding SearchTerm}"
+                                        EventName="Completed" />
                                 </controls:BorderlessEntry.Behaviors>
                             </controls:BorderlessEntry>
                             <Label
-                            Margin="0,0,10,0"
-                            AutomationId="clearButton"
-                            FontFamily="{StaticResource MaterialFontFamily}"
-                            FontSize="25"
-                            IsVisible="{Binding SearchTerm}"
-                            Text="{Binding ClearIcon}"
-                            TextColor="Black"
-                            VerticalOptions="Center">
+                                Margin="0,0,10,0"
+                                AutomationId="clearButton"
+                                FontFamily="{StaticResource MaterialFontFamily}"
+                                FontSize="25"
+                                IsVisible="{Binding SearchTerm}"
+                                Text="{Binding ClearIcon}"
+                                TextColor="Black"
+                                VerticalOptions="Center">
                                 <Label.Triggers>
                                     <DataTrigger TargetType="Label"
-                                             Binding="{Binding SearchTerm}"
-                                             Value="">
+                                                    Binding="{Binding SearchTerm}"
+                                                    Value="">
                                         <Setter Property="IsVisible" Value="False" />
                                     </DataTrigger>
                                 </Label.Triggers>
@@ -72,27 +71,28 @@
                         </StackLayout>
                     </Frame>
                 </StackLayout>
-                 <StackLayout>
-                        <Label Text="Dinner Recipes"
-                               Margin="10,8,0,0"
-                               FontSize="Large"
-                               VerticalOptions="CenterAndExpand"
-                               HorizontalOptions="StartAndExpand"
-                               FontAttributes="Bold"/>
-                     </StackLayout>
-                <ScrollView Orientation="Horizontal">
-                   
-                    
-                    <controls:HorizontalList x:Name="DinnerRecipeListView" HeightRequest="500"
-                                             Padding="10"
-                                             ItemsSource="{Binding DinnerRecipes}"
-                                             SelectedItem="{Binding SelectedRecipe}">
-                        <controls:HorizontalList.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding RecipeSelected}" NumberOfTapsRequired="1"/>
-                        </controls:HorizontalList.GestureRecognizers>
-                        <controls:HorizontalList.ItemTemplate>
-                            <DataTemplate>
-                                <Frame Padding="0"
+                <StackLayout>
+                    <Label Text="Dinner Recipes"
+                            Margin="10,8,0,0"
+                            FontSize="Large"
+                            VerticalOptions="CenterAndExpand"
+                            HorizontalOptions="StartAndExpand"
+                            FontAttributes="Bold"/>
+                </StackLayout>
+
+                 <CarouselView x:Name="DinnerRecipeListView"
+                               HeightRequest="500"
+                               Margin="10"
+                               CurrentItem="{Binding SelectedRecipe}"
+                               ItemsSource="{Binding DinnerRecipes}">
+                    <CarouselView.Behaviors>
+                        <behaviorsPack:EventToCommandBehavior Command="{Binding RecipeSelected}"/>
+                    </CarouselView.Behaviors>
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <ContentView>
+                                <Frame Padding=".5"
+                                       HasShadow="True"
                                        BorderColor="{DynamicResource Key=NeutralGray3}"
                                        CornerRadius="4">
                                     <StackLayout Spacing="0" BackgroundColor="Transparent">
@@ -100,17 +100,18 @@
                                             <TapGestureRecognizer
                                                 BindingContext="{Binding Source={x:Reference DinnerRecipeListView}, Path=BindingContext}"
                                                 Command="{Binding RecipeSelected}"
+                                                CommandParameter="{Binding SelectedRecipe}"
                                                 NumberOfTapsRequired="1" />
                                         </StackLayout.GestureRecognizers>
-                                        <Frame Margin="0"
+                                        <Frame Margin="1"
                                                 CornerRadius="0"
                                                 BorderColor="{DynamicResource Key=NeutralGray3}"
                                                 HasShadow="True"
                                                 Padding="0">
                                             <StackLayout Padding="0"
-                                                         BackgroundColor="{DynamicResource Key=NeutralGray1}"
-                                                         Orientation="Horizontal"
-                                                         Spacing="0">
+                                                            BackgroundColor="{DynamicResource Key=NeutralGray1}"
+                                                            Orientation="Horizontal"
+                                                            Spacing="0">
                                                 <Label Text="{Binding Type, Converter={StaticResource recipeTypeConverter}}"
                                                         FontSize="Large"
                                                         VerticalOptions="CenterAndExpand"
@@ -129,13 +130,19 @@
                                                 <ColumnDefinition Width="200" />
                                                 <ColumnDefinition Width="2*" />
                                             </Grid.ColumnDefinitions>
-                                            <Image Grid.Row="0"
-                                                    Grid.Column="0"
-                                                    Grid.ColumnSpan="2"
-                                                    WidthRequest="200"
-                                                    Margin="0"
-                                                    Aspect="AspectFill"
-                                                    Source="{Binding Image}"/>
+                                            <Frame Grid.Row="0"
+                                                   Grid.Column="0"
+                                                   Grid.ColumnSpan="2"
+                                                   Margin="0"
+                                                   CornerRadius="0"
+                                                   Padding="1"
+                                                   HasShadow="True"
+                                                   BorderColor="{DynamicResource Key=NeutralGray3}">
+                                                <Image WidthRequest="200"
+                                                       Margin="0"
+                                                       Aspect="AspectFill"
+                                                       Source="{Binding Image}"/>
+                                            </Frame>
                                             <Label Grid.Row="1"
                                                     Grid.Column="0"
                                                     Grid.RowSpan="3"
@@ -145,7 +152,7 @@
                                                     TextColor="{DynamicResource Key=primary}"
                                                     HorizontalOptions="CenterAndExpand"
                                                     HorizontalTextAlignment="Center"
-                                                   VerticalOptions="CenterAndExpand"/>
+                                                    VerticalOptions="CenterAndExpand"/>
                                             <Label Grid.Row="1"
                                                     Grid.Column="1"
                                                     Margin="0,8,8,0"
@@ -167,10 +174,10 @@
                                         </Grid>
                                     </StackLayout>
                                 </Frame>
-                            </DataTemplate>
-                        </controls:HorizontalList.ItemTemplate>
-                    </controls:HorizontalList>
-                </ScrollView>
+                            </ContentView>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
 
                 <StackLayout>
                     <Label Text="Dessert Recipes"
@@ -180,19 +187,19 @@
                             HorizontalOptions="StartAndExpand"
                             FontAttributes="Bold"/>
                 </StackLayout>
-                <ScrollView Orientation="Horizontal">
-                   
-                    
-                    <controls:HorizontalList x:Name="DessertRecipeListView" HeightRequest="500"
-                                             Padding="10"
-                                             ItemsSource="{Binding DessertRecipes}"
-                                             SelectedItem="{Binding SelectedRecipe}">
-                        <controls:HorizontalList.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding RecipeSelected}" NumberOfTapsRequired="1"/>
-                        </controls:HorizontalList.GestureRecognizers>
-                        <controls:HorizontalList.ItemTemplate>
-                            <DataTemplate>
-                                <Frame Padding="0"
+                <CarouselView x:Name="DessertRecipeListView"
+                              HeightRequest="500"
+                              Margin="10"
+                              CurrentItem="{Binding SelectedRecipe}"
+                              ItemsSource="{Binding DessertRecipes}">
+                    <CarouselView.Behaviors>
+                        <behaviorsPack:EventToCommandBehavior Command="{Binding RecipeSelected}"/>
+                    </CarouselView.Behaviors>
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <ContentView>
+                                <Frame Padding=".5"
+                                       HasShadow="True"
                                        BorderColor="{DynamicResource Key=NeutralGray3}"
                                        CornerRadius="4">
                                     <StackLayout Spacing="0" BackgroundColor="Transparent">
@@ -200,17 +207,18 @@
                                             <TapGestureRecognizer
                                                 BindingContext="{Binding Source={x:Reference DessertRecipeListView}, Path=BindingContext}"
                                                 Command="{Binding RecipeSelected}"
+                                                CommandParameter="{Binding SelectedRecipe}"
                                                 NumberOfTapsRequired="1" />
                                         </StackLayout.GestureRecognizers>
-                                        <Frame Margin="0"
+                                        <Frame Margin="1"
                                                 CornerRadius="0"
                                                 BorderColor="{DynamicResource Key=NeutralGray3}"
                                                 HasShadow="True"
                                                 Padding="0">
                                             <StackLayout Padding="0"
-                                                         BackgroundColor="{DynamicResource Key=NeutralGray1}"
-                                                         Orientation="Horizontal"
-                                                         Spacing="0">
+                                                            BackgroundColor="{DynamicResource Key=NeutralGray1}"
+                                                            Orientation="Horizontal"
+                                                            Spacing="0">
                                                 <Label Text="{Binding Type, Converter={StaticResource recipeTypeConverter}}"
                                                         FontSize="Large"
                                                         VerticalOptions="CenterAndExpand"
@@ -229,13 +237,20 @@
                                                 <ColumnDefinition Width="200" />
                                                 <ColumnDefinition Width="2*" />
                                             </Grid.ColumnDefinitions>
-                                            <Image Grid.Row="0"
-                                                    Grid.Column="0"
-                                                    Grid.ColumnSpan="2"
-                                                    WidthRequest="200"
-                                                    Margin="0"
-                                                    Aspect="AspectFill"
-                                                    Source="{Binding Image}"/>
+                                            <Frame Grid.Row="0"
+                                                   Grid.Column="0"
+                                                   Grid.ColumnSpan="2"
+                                                   Margin="0"
+                                                   CornerRadius="0"
+                                                   Padding="1"
+                                                   HasShadow="True"
+                                                   BorderColor="{DynamicResource Key=NeutralGray3}">
+                                                <Image WidthRequest="200"
+                                                       Margin="0"
+                                                       Aspect="AspectFill"
+                                                       Source="{Binding Image}"/>
+                                            </Frame>
+                                            
                                             <Label Grid.Row="1"
                                                     Grid.Column="0"
                                                     Grid.RowSpan="3"
@@ -245,7 +260,7 @@
                                                     TextColor="{DynamicResource Key=primary}"
                                                     HorizontalOptions="CenterAndExpand"
                                                     HorizontalTextAlignment="Center"
-                                                   VerticalOptions="CenterAndExpand"/>
+                                                    VerticalOptions="CenterAndExpand"/>
                                             <Label Grid.Row="1"
                                                     Grid.Column="1"
                                                     Margin="0,8,8,0"
@@ -267,10 +282,10 @@
                                         </Grid>
                                     </StackLayout>
                                 </Frame>
-                            </DataTemplate>
-                        </controls:HorizontalList.ItemTemplate>
-                    </controls:HorizontalList>
-                </ScrollView>
+                            </ContentView>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
             </StackLayout>
         </ScrollView>
     </mxe:MxeBaseContentPage.Content>

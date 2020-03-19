@@ -9,5 +9,6 @@ namespace Recipes.Repository.ReceipeSelectionRepository
     {
         Task<(List<Recipe> Recipes, bool IsSuccess)> GetDinnerRecipes();
         Task<(List<Recipe> Recipes, bool IsSuccess)> GetDessertRecipes();
+        Task<(List<Recipe> Recipes, bool IsSuccess)> GetRecipeDetails(string recipe);
     }
 }

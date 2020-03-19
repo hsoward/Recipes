@@ -1,6 +1,8 @@
 ﻿using System;
 using Acr.UserDialogs;
 using Foundation;
+using MTI.XamEssentials.MxeMvvm;
+using MTI.XamEssentials.Services;
 using Serilog;
 using UIKit;
 
@@ -22,8 +24,8 @@ namespace Recipes.iOS
         [Foundation.Export("application:didFinishLaunchingWithOptions:")]
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            global::Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
             global::Xamarin.Forms.Forms.Init();
-
             LoadApplication(new App());
             Log.Information("App started");
             return base.FinishedLaunching(app, options);

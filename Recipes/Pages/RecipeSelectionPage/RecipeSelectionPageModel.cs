@@ -96,7 +96,7 @@ namespace Recipes.Pages.RecipeSelectionPage
         {
             get
             {
-                return new Command(async (recipe) =>
+                return new Command(async () =>
                 {
                     if (IsLocked)
                     {
