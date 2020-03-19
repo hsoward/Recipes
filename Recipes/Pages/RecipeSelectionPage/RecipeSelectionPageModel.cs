@@ -57,18 +57,11 @@ namespace Recipes.Pages.RecipeSelectionPage
             set => SetProperty(ref filteredRecipes, value);
         }
 
-        private List<Recipe> dinnerRecipes = new List<Recipe>();
-        public List<Recipe> DinnerRecipes
+        private List<Recipe> recipes = new List<Recipe>();
+        public List<Recipe> Recipes
         {
-            get => dinnerRecipes;
-            set => SetProperty(ref dinnerRecipes, value);
-        }
-
-        private List<Recipe> dessertRecipes = new List<Recipe>();
-        public List<Recipe> DessertRecipes
-        {
-            get => dessertRecipes;
-            set => SetProperty(ref dessertRecipes, value);
+            get => recipes;
+            set => SetProperty(ref recipes, value);
         }
 
         private Recipe selectedRecipe;
@@ -87,7 +80,27 @@ namespace Recipes.Pages.RecipeSelectionPage
             {
                 return new Command<string>((searchString) =>
                 {
-                    //FilteredRecipes = new MxeObservableRangeCollection<Recipe>(AllRecipes.Where(o => o.Name.ToLower().Contains(searchString.ToLower())));
+                    var foundRecipes = Recipes.Where(o => o.Name.ToLower().Contains(searchString.ToLower()));
+                    if (foundRecipes.Any())
+                    {
+                        Recipes = new List<Recipe>(foundRecipes);
+                    }
+                    else
+                    {
+                        UserDialogs.Instance.Toast(DialogUtils.GetToastConfig(DialogType.ERROR, $"No Recipe's found for {searchString}"));
+                    }
+                });
+            }
+        }
+
+        public Command ClearCommand
+        {
+            get
+            {
+                return new Command<string>(async (searchString) =>
+                {
+                    SearchTerm = "";
+                    await GetAllRecipesAsync();
                 });
             }
         }
@@ -116,32 +129,17 @@ namespace Recipes.Pages.RecipeSelectionPage
 
         public override async void Init(object initData)
         {
-            await GetDinnerRecipesAsync();
-            await GetDessertRecipesAsync();
+            await GetAllRecipesAsync();
         }
         #endregion
 
-        private async Task GetDinnerRecipesAsync()
+        private async Task GetAllRecipesAsync()
         {
-            var response = await _recipeSelectionRepository.GetDinnerRecipes();
+            var response = await _recipeSelectionRepository.GetAllRecipes();
 
             if (response.IsSuccess)
             {
-                DinnerRecipes = response.Recipes;
-            }
-            else
-            {
-                UserDialogs.Instance.Toast(DialogUtils.GetToastConfig(DialogType.ERROR, "Unable to retrieve all recipes at this time."));
-            }
-        }
-
-        private async Task GetDessertRecipesAsync()
-        {
-            var response = await _recipeSelectionRepository.GetDessertRecipes();
-
-            if (response.IsSuccess)
-            {
-                DessertRecipes = response.Recipes;
+                Recipes = response.Recipes;
             }
             else
             {

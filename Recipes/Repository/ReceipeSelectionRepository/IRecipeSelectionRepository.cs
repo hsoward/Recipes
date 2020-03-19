@@ -7,8 +7,7 @@ namespace Recipes.Repository.ReceipeSelectionRepository
 {
     public interface IRecipeSelectionRepository
     {
-        Task<(List<Recipe> Recipes, bool IsSuccess)> GetDinnerRecipes();
-        Task<(List<Recipe> Recipes, bool IsSuccess)> GetDessertRecipes();
+        Task<(List<Recipe> Recipes, bool IsSuccess)> GetAllRecipes();
         Task<(List<Recipe> Recipes, bool IsSuccess)> GetRecipeDetails(string recipe);
     }
 }

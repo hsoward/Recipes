@@ -3,9 +3,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:mxe="clr-namespace:MTI.XamEssentials.MxeMvvm;assembly=XamEssentials"
-    xmlns:behaviorsPack="clr-namespace:Xamarin.Forms.BehaviorsPack;assembly=Xamarin.Forms.BehaviorsPack"
     xmlns:converter="clr-namespace:Recipes.Converters"
-    xmlns:control="clr-namespace:Recipes.Controls"
     x:Class="Recipes.Pages.RecipeDetailsPage.RecipeDetailsPage"
     Title="{Binding Title}"
     BackgroundColor="White"
@@ -25,7 +23,7 @@
                            IsClippedToBounds="True">
                         <Image Source="{Binding SelectedRecipe.Image}" 
                                HorizontalOptions="Center"
-                               HeightRequest="300"
+                               HeightRequest="200"
                                WidthRequest="415"
                                Aspect="AspectFill"
                                VerticalOptions="Center" />
@@ -50,13 +48,13 @@
                                         <StackLayout Padding="0">
                                             <Frame CornerRadius="4"
                                                    HasShadow="True"
-                                                   Padding="25,5,0,5"
+                                                   Padding="5"
                                                    BackgroundColor="{DynamicResource Key=recipe_details_gray}">
                                                 <Grid BackgroundColor="{DynamicResource Key=recipe_details_gray}">
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition Height="auto" />
                                                         <RowDefinition Height="30" />
-                                                        <RowDefinition Height="40" />
+                                                        <RowDefinition Height="auto" />
                                                         <RowDefinition Height="40" />
                                                         <RowDefinition Height="1" />
                                                         <RowDefinition Height="37" />
@@ -66,9 +64,9 @@
                                                         <RowDefinition Height="auto" />
                                                     </Grid.RowDefinitions>
                                                     <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="120" />
-                                                        <ColumnDefinition Width="120" />
-                                                        <ColumnDefinition Width="120" />
+                                                        <ColumnDefinition Width="auto" />
+                                                        <ColumnDefinition Width="auto" />
+                                                        <ColumnDefinition Width="auto" />
                                                     </Grid.ColumnDefinitions>
                                                         <Label Grid.Row="0"
                                                                Grid.Column="0"
@@ -98,7 +96,7 @@
                                                         
                                                         <Label Grid.Row="2"
                                                                Grid.Column="0"
-                                                               Margin="8,0,0,0"
+                                                               Margin="0"
                                                                FontSize="Medium"
                                                                TextColor="{DynamicResource Key=NeutralGray6}"
                                                                HorizontalOptions="StartAndExpand"

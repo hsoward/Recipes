@@ -65,26 +65,18 @@
                                     </DataTrigger>
                                 </Label.Triggers>
                                 <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding ClearSearchCommand}" NumberOfTapsRequired="1" />
+                                    <TapGestureRecognizer Command="{Binding ClearCommand}" NumberOfTapsRequired="1" />
                                 </Label.GestureRecognizers>
                             </Label>
                         </StackLayout>
                     </Frame>
                 </StackLayout>
-                <StackLayout>
-                    <Label Text="Dinner Recipes"
-                            Margin="10,8,0,0"
-                            FontSize="Large"
-                            VerticalOptions="CenterAndExpand"
-                            HorizontalOptions="StartAndExpand"
-                            FontAttributes="Bold"/>
-                </StackLayout>
 
-                 <CarouselView x:Name="DinnerRecipeListView"
-                               HeightRequest="500"
+                 <CarouselView x:Name="RecipeListView"
+                               HeightRequest="600"
                                Margin="10"
                                CurrentItem="{Binding SelectedRecipe}"
-                               ItemsSource="{Binding DinnerRecipes}">
+                               ItemsSource="{Binding Recipes}">
                     <CarouselView.Behaviors>
                         <behaviorsPack:EventToCommandBehavior Command="{Binding RecipeSelected}"/>
                     </CarouselView.Behaviors>
@@ -98,7 +90,7 @@
                                     <StackLayout Spacing="0" BackgroundColor="Transparent">
                                         <StackLayout.GestureRecognizers>
                                             <TapGestureRecognizer
-                                                BindingContext="{Binding Source={x:Reference DinnerRecipeListView}, Path=BindingContext}"
+                                                BindingContext="{Binding Source={x:Reference RecipeListView}, Path=BindingContext}"
                                                 Command="{Binding RecipeSelected}"
                                                 CommandParameter="{Binding SelectedRecipe}"
                                                 NumberOfTapsRequired="1" />
@@ -122,7 +114,7 @@
                                         </Frame>
                                         <Grid>
                                             <Grid.RowDefinitions>
-                                                <RowDefinition Height="350" />
+                                                <RowDefinition Height="450" />
                                                 <RowDefinition Height="30" />
                                                 <RowDefinition Height="30" />
                                             </Grid.RowDefinitions>
@@ -143,114 +135,6 @@
                                                        Aspect="AspectFill"
                                                        Source="{Binding Image}"/>
                                             </Frame>
-                                            <Label Grid.Row="1"
-                                                    Grid.Column="0"
-                                                    Grid.RowSpan="3"
-                                                    Margin="8,8,8,0"
-                                                    FontSize="Medium"
-                                                    Text="{Binding Name}"
-                                                    TextColor="{DynamicResource Key=primary}"
-                                                    HorizontalOptions="CenterAndExpand"
-                                                    HorizontalTextAlignment="Center"
-                                                    VerticalOptions="CenterAndExpand"/>
-                                            <Label Grid.Row="1"
-                                                    Grid.Column="1"
-                                                    Margin="0,8,8,0"
-                                                    FontSize="Medium"
-                                                    FontAttributes="Bold"
-                                                    Text="{Binding Calories, StringFormat='{0} Calories'}"
-                                                    TextColor="{DynamicResource Key=charcoal_gray}"
-                                                    HorizontalOptions="StartAndExpand"
-                                                    HorizontalTextAlignment="Start"/>
-                                            <Label Grid.Row="2"
-                                                    Grid.Column="1"
-                                                    Grid.RowSpan="3"
-                                                    Margin="0,0,8,0"
-                                                    FontSize="Medium"
-                                                    Text="{Binding Author, StringFormat='By: {0} '}"
-                                                    TextColor="{DynamicResource Key=charcoal_gray}"
-                                                    HorizontalOptions="StartAndExpand"
-                                                    HorizontalTextAlignment="Start"/>
-                                        </Grid>
-                                    </StackLayout>
-                                </Frame>
-                            </ContentView>
-                        </DataTemplate>
-                    </CarouselView.ItemTemplate>
-                </CarouselView>
-
-                <StackLayout>
-                    <Label Text="Dessert Recipes"
-                            Margin="10,8,0,0"
-                            FontSize="Large"
-                            VerticalOptions="CenterAndExpand"
-                            HorizontalOptions="StartAndExpand"
-                            FontAttributes="Bold"/>
-                </StackLayout>
-                <CarouselView x:Name="DessertRecipeListView"
-                              HeightRequest="500"
-                              Margin="10"
-                              CurrentItem="{Binding SelectedRecipe}"
-                              ItemsSource="{Binding DessertRecipes}">
-                    <CarouselView.Behaviors>
-                        <behaviorsPack:EventToCommandBehavior Command="{Binding RecipeSelected}"/>
-                    </CarouselView.Behaviors>
-                    <CarouselView.ItemTemplate>
-                        <DataTemplate>
-                            <ContentView>
-                                <Frame Padding=".5"
-                                       HasShadow="True"
-                                       BorderColor="{DynamicResource Key=NeutralGray3}"
-                                       CornerRadius="4">
-                                    <StackLayout Spacing="0" BackgroundColor="Transparent">
-                                        <StackLayout.GestureRecognizers>
-                                            <TapGestureRecognizer
-                                                BindingContext="{Binding Source={x:Reference DessertRecipeListView}, Path=BindingContext}"
-                                                Command="{Binding RecipeSelected}"
-                                                CommandParameter="{Binding SelectedRecipe}"
-                                                NumberOfTapsRequired="1" />
-                                        </StackLayout.GestureRecognizers>
-                                        <Frame Margin="1"
-                                                CornerRadius="0"
-                                                BorderColor="{DynamicResource Key=NeutralGray3}"
-                                                HasShadow="True"
-                                                Padding="0">
-                                            <StackLayout Padding="0"
-                                                            BackgroundColor="{DynamicResource Key=NeutralGray1}"
-                                                            Orientation="Horizontal"
-                                                            Spacing="0">
-                                                <Label Text="{Binding Type, Converter={StaticResource recipeTypeConverter}}"
-                                                        FontSize="Large"
-                                                        VerticalOptions="CenterAndExpand"
-                                                        Margin="0,5"
-                                                        HorizontalOptions="CenterAndExpand"
-                                                        FontAttributes="Bold"/>
-                                            </StackLayout>
-                                        </Frame>
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="350" />
-                                                <RowDefinition Height="30" />
-                                                <RowDefinition Height="30" />
-                                            </Grid.RowDefinitions>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="200" />
-                                                <ColumnDefinition Width="2*" />
-                                            </Grid.ColumnDefinitions>
-                                            <Frame Grid.Row="0"
-                                                   Grid.Column="0"
-                                                   Grid.ColumnSpan="2"
-                                                   Margin="0"
-                                                   CornerRadius="0"
-                                                   Padding="1"
-                                                   HasShadow="True"
-                                                   BorderColor="{DynamicResource Key=NeutralGray3}">
-                                                <Image WidthRequest="200"
-                                                       Margin="0"
-                                                       Aspect="AspectFill"
-                                                       Source="{Binding Image}"/>
-                                            </Frame>
-                                            
                                             <Label Grid.Row="1"
                                                     Grid.Column="0"
                                                     Grid.RowSpan="3"

@@ -25,26 +25,15 @@ namespace Recipes.Repository.ReceipeSelectionRepository
             return Task.FromResult((Mapper.Map<List<RecipeDto>, List<Recipe>>(recipeDetails), true));
         }
 
-        public Task<(List<Recipe> Recipes, bool IsSuccess)> GetDessertRecipes()
+        public Task<(List<Recipe> Recipes, bool IsSuccess)> GetAllRecipes()
         {
             if (mockRecipes.Count == 0)
             {
                 PopulateRecipes();
             }
 
-            var dessertRecipes = mockRecipes.FindAll(x => x.category == RecipeCategory.DESSERT.GetDescription());
-            return Task.FromResult((Mapper.Map<List<RecipeDto>, List<Recipe>>(dessertRecipes), true));
-        }
-
-        public Task<(List<Recipe> Recipes, bool IsSuccess)> GetDinnerRecipes()
-        {
-            if (mockRecipes.Count == 0)
-            {
-                PopulateRecipes();
-            }
-
-            var dinnerRecipes = mockRecipes.FindAll(x => x.category == RecipeCategory.DINNER.GetDescription());
-            return Task.FromResult((Mapper.Map<List<RecipeDto>, List<Recipe>>(dinnerRecipes), true));
+            var recipes = mockRecipes;
+            return Task.FromResult((Mapper.Map<List<RecipeDto>, List<Recipe>>(recipes), true));
         }
 
         public List<RecipeDto> PopulateRecipes()
