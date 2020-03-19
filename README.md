@@ -6,6 +6,7 @@ App displaying recipes using the CarouselView with custom controls and converter
 
 * [Xamarin Forms](https://www.nuget.org/packages/Xamarin.Forms)
 * [CarouselView](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/carouselview/)
+* [MVVM](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/enterprise-application-patterns/mvvm)
 
 ## Authors
 
