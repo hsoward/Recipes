@@ -12,6 +12,6 @@ App displaying recipes using the CarouselView with custom controls and converter
 
 * **Hallie Soward**
 
-<img src="https://user-images.githubusercontent.com/54910065/77369063-aa83b100-6d2b-11ea-8beb-adeebe8009e2.gif" align=left padding=0,0,10,10 height=500 width=250>
+<img src="https://user-images.githubusercontent.com/54910065/77369165-f2a2d380-6d2b-11ea-8ce1-7d2ed2b7d074.gif" align=left padding=0,0,10,10 height=500 width=250>
 <img src="https://user-images.githubusercontent.com/54910065/77368285-e289f480-6d29-11ea-8aca-3127e0c2ff57.png" width=250 align=left padding=0,0,10,10>
 <img src="https://user-images.githubusercontent.com/54910065/77368287-e4ec4e80-6d29-11ea-9b3b-e6557bd6d341.png" width=250 align=left padding=0,10,0,10>
