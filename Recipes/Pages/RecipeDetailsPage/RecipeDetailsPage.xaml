@@ -18,7 +18,8 @@
         <ScrollView BackgroundColor="{DynamicResource Key=recipe_details_gray}">
             <StackLayout>
                 <StackLayout Padding="0,-20,0,10">
-                    <Frame CornerRadius="25" 
+                    <Frame CornerRadius="25"
+                           BackgroundColor="{DynamicResource Key=background_gray}"
                            Padding="0"
                            IsClippedToBounds="True">
                         <Image Source="{Binding SelectedRecipe.Image}" 
@@ -33,9 +34,7 @@
                 <ListView x:Name="RecipeDetailsListView"
                           ItemsSource="{Binding RecipeDetails}"
                           HasUnevenRows="true"
-                          BackgroundColor="{DynamicResource Key=recipe_details_gray}"
-                          HorizontalOptions="FillAndExpand"
-                          VerticalOptions="FillAndExpand">
+                          BackgroundColor="{DynamicResource Key=recipe_details_gray}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -64,13 +63,12 @@
                                                         <RowDefinition Height="auto" />
                                                     </Grid.RowDefinitions>
                                                     <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="auto" />
-                                                        <ColumnDefinition Width="auto" />
-                                                        <ColumnDefinition Width="auto" />
+                                                        <ColumnDefinition Width="5*" />
+                                                        <ColumnDefinition Width="5*" />
                                                     </Grid.ColumnDefinitions>
                                                         <Label Grid.Row="0"
                                                                Grid.Column="0"
-                                                               Grid.ColumnSpan="3"
+                                                               Grid.ColumnSpan="4"
                                                                Margin="0"
                                                                FontSize="Large"
                                                                Style="{StaticResource bold_italic_attributes}"
@@ -80,7 +78,7 @@
                                                                HorizontalTextAlignment="Center"/>
                                                         <Label Grid.Row="1"
                                                                Grid.Column="0"
-                                                               Grid.ColumnSpan="3"
+                                                               Grid.ColumnSpan="4"
                                                                Margin="0"
                                                                FontSize="Medium"
                                                                TextColor="{DynamicResource Key=NeutralGray6}"
@@ -93,64 +91,73 @@
                                                                 </FormattedString>
                                                             </Label.FormattedText>
                                                         </Label>
-                                                        
-                                                        <Label Grid.Row="2"
-                                                               Grid.Column="0"
-                                                               Margin="0"
-                                                               FontSize="Medium"
-                                                               TextColor="{DynamicResource Key=NeutralGray6}"
-                                                               HorizontalOptions="StartAndExpand"
-                                                               HorizontalTextAlignment="Start"
-                                                               VerticalOptions="CenterAndExpand">
-                                                            <Label.FormattedText>
-                                                                <FormattedString>
-                                                                    <Span Text=" Prep | "/>
-                                                                    <Span Text="{Binding PrepTime}" FontSize="20" FontAttributes="Bold"/>
-                                                                </FormattedString>
-                                                            </Label.FormattedText>
-                                                        </Label>
+                                                        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalOptions="CenterAndExpand">
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="30" />
+                                                            </Grid.RowDefinitions>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="auto" />
+                                                                <ColumnDefinition Width="auto" />
+                                                                <ColumnDefinition Width="auto" />
+                                                            </Grid.ColumnDefinitions>
+                                                            <Label Grid.Row="0"
+                                                                   Grid.Column="0"
+                                                                   Margin="8,0,0,0"
+                                                                   FontSize="Medium"
+                                                                   TextColor="{DynamicResource Key=NeutralGray6}"
+                                                                   HorizontalOptions="CenterAndExpand"
+                                                                   HorizontalTextAlignment="Start"
+                                                                   VerticalOptions="CenterAndExpand">
+                                                                <Label.FormattedText>
+                                                                    <FormattedString>
+                                                                        <Span Text=" Prep | "/>
+                                                                        <Span Text="{Binding PrepTime}" FontSize="20" FontAttributes="Bold"/>
+                                                                    </FormattedString>
+                                                                </Label.FormattedText>
+                                                            </Label>
 
-                                                        <Label Grid.Row="2"
-                                                               Grid.Column="1"
-                                                               Margin="8,0,0,0"
-                                                               FontSize="Medium"
-                                                               TextColor="{DynamicResource Key=NeutralGray6}"
-                                                               HorizontalOptions="StartAndExpand"
-                                                               HorizontalTextAlignment="Start"
-                                                               VerticalOptions="CenterAndExpand">
-                                                            <Label.FormattedText>
-                                                                <FormattedString>
-                                                                    <Span Text="Cook | "/>
-                                                                    <Span Text="{Binding CookTime}" FontSize="20" FontAttributes="Bold"/>
-                                                                </FormattedString>
-                                                            </Label.FormattedText>
-                                                        </Label>
+                                                            <Label Grid.Row="0"
+                                                                   Grid.Column="1"
+                                                                   Margin="8,0,0,0"
+                                                                   FontSize="Medium"
+                                                                   TextColor="{DynamicResource Key=NeutralGray6}"
+                                                                   HorizontalOptions="CenterAndExpand"
+                                                                   HorizontalTextAlignment="Start"
+                                                                   VerticalOptions="CenterAndExpand">
+                                                                <Label.FormattedText>
+                                                                    <FormattedString>
+                                                                        <Span Text="Cook | "/>
+                                                                        <Span Text="{Binding CookTime}" FontSize="20" FontAttributes="Bold"/>
+                                                                    </FormattedString>
+                                                                </Label.FormattedText>
+                                                            </Label>
 
-                                                        <Label Grid.Row="2"
-                                                               Grid.Column="2"
-                                                               FontSize="Medium"
-                                                               Margin="8,0,0,0"
-                                                               TextColor="{DynamicResource Key=NeutralGray6}"
-                                                               HorizontalOptions="StartAndExpand"
-                                                               HorizontalTextAlignment="Start"
-                                                               VerticalOptions="CenterAndExpand">
-                                                            <Label.FormattedText>
-                                                                <FormattedString>
-                                                                    <Span Text="Total | "/>
-                                                                    <Span Text="{Binding TotalTime}" FontSize="20" FontAttributes="Bold"/>
-                                                                </FormattedString>
-                                                            </Label.FormattedText>
-                                                        </Label>
+                                                            <Label Grid.Row="0"
+                                                                   Grid.Column="2"
+                                                                   FontSize="Medium"
+                                                                   Margin="8,0,0,0"
+                                                                   TextColor="{DynamicResource Key=NeutralGray6}"
+                                                                   HorizontalOptions="CenterAndExpand"
+                                                                   HorizontalTextAlignment="Start"
+                                                                   VerticalOptions="CenterAndExpand">
+                                                                <Label.FormattedText>
+                                                                    <FormattedString>
+                                                                        <Span Text="Total | "/>
+                                                                        <Span Text="{Binding TotalTime}" FontSize="20" FontAttributes="Bold"/>
+                                                                    </FormattedString>
+                                                                </Label.FormattedText>
+                                                            </Label>
+                                                        </Grid>
 
-                                                    <Label Grid.Row="3"
+                                                        <Label Grid.Row="3"
                                                                Grid.Column="0"
                                                                Grid.ColumnSpan="2"
-                                                               Margin="60,0,0,0"
+                                                               Margin="0,0,50,0"
                                                                FontSize="28"
                                                                FontAttributes="Bold"
                                                                TextColor="{DynamicResource Key=NeutralGray6}"
-                                                               HorizontalOptions="StartAndExpand"
-                                                               HorizontalTextAlignment="Center"
+                                                               HorizontalOptions="CenterAndExpand"
+                                                               HorizontalTextAlignment="End"
                                                                VerticalOptions="CenterAndExpand">
                                                             <Label.FormattedText>
                                                                 <FormattedString>
@@ -162,12 +169,11 @@
 
                                                         <Label Grid.Row="3"
                                                                Grid.Column="1"
-                                                               Grid.ColumnSpan="2"
-                                                               Margin="70,0,0,0"
+                                                               Margin="10,0,0,0"
                                                                FontSize="28"
                                                                FontAttributes="Bold"
                                                                TextColor="{DynamicResource Key=NeutralGray6}"
-                                                               HorizontalOptions="StartAndExpand"
+                                                               HorizontalOptions="CenterAndExpand"
                                                                HorizontalTextAlignment="Center"
                                                                VerticalOptions="CenterAndExpand">
                                                             <Label.FormattedText>
@@ -180,14 +186,14 @@
 
                                                         <BoxView Grid.Row="4"
                                                                  Grid.Column="0"
-                                                                 Grid.ColumnSpan="3"
+                                                                 Grid.ColumnSpan="4"
                                                                  BackgroundColor="Gray"
                                                                  HorizontalOptions="FillAndExpand"
                                                                  Margin="0,0,8,0"/>
 
                                                         <Label Grid.Row="5"
                                                                Grid.Column="0"
-                                                               Grid.ColumnSpan="3"
+                                                               Grid.ColumnSpan="4"
                                                                Margin="0,0,20,0"
                                                                Text="Ingredients"
                                                                FontAttributes="Bold"
@@ -198,8 +204,8 @@
 
                                                         <Label Grid.Row="6"
                                                                Grid.Column="0"
-                                                               Grid.ColumnSpan="3"
-                                                               Margin="8,0,8,8"
+                                                               Grid.ColumnSpan="4"
+                                                               Margin="15,0,8,8"
                                                                FontSize="Medium"
                                                                Text="{Binding Ingredients, Converter={StaticResource IngredientsConverter}}"
                                                                TextColor="{DynamicResource Key=NeutralGray6}"
@@ -209,14 +215,14 @@
 
                                                         <BoxView Grid.Row="7"
                                                                  Grid.Column="0"
-                                                                 Grid.ColumnSpan="3"
+                                                                 Grid.ColumnSpan="4"
                                                                  BackgroundColor="Gray"
                                                                  HorizontalOptions="FillAndExpand"
                                                                  Margin="0,0,8,0"/>
 
                                                         <Label Grid.Row="8"
                                                                Grid.Column="0"
-                                                               Grid.ColumnSpan="3"
+                                                               Grid.ColumnSpan="4"
                                                                Margin="0,0,20,0"
                                                                Text="Directions"
                                                                FontAttributes="Bold"
@@ -227,7 +233,7 @@
 
                                                         <Label Grid.Row="9"
                                                                Grid.Column="0"
-                                                               Grid.ColumnSpan="3"
+                                                               Grid.ColumnSpan="4"
                                                                Margin="8,8,8,0"
                                                                FontSize="Medium"
                                                                Text="{Binding Directions, Converter={StaticResource DirectionsConverter}}"
